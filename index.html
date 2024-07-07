@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<style type="text/css"></style>
+		<title>JavaScript PixiArt</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="./style.css" rel="stylesheet" type="text/css">
+		<script src="./index.js" type="module"></script>
+		<style>
+			.button {
+				background-color: #04AA6D; /* Green */
+				border: none;
+				color: white;
+				padding: 15px 32px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 16px;
+				margin: 4px 2px;
+				cursor: pointer;
+			}
+			
+			.button2 {background-color: #008CBA;} /* Blue */
+			.button3 {background-color: #f44336;} /* Red */ 
+			.button4 {background-color: #e7e7e7; color: black;} /* Gray */ 
+			.button5 {background-color: #555555;} /* Black */
+			</style>
+
+
+
+	</head>
+	<body>
+
+
+
+		<input type="button" value="Start" id="start" class="button">
+
+
+
+</br></br>		
+
+
+<canvas id="myCanvas"></canvas>
+</br></br>		
+</br></br>
+</br></br>
+<div id="buttons"></div>
+
+
+
+<!--<img id="image" src="img.png" width="20" height="20" />-->
+
+
+		
+<script>
+
+	//function start(){
+	//	console.log("start start");
+	//}
+
+	window.onload = (event) => {
+		console.log("page PixiArt is fully loaded");
+	};
+
+
+
+
+//^[+-][0-9]+$
+
+
+			//document.getElementById("myP").addEventListener("click", );
+
+
+		/*
+- [ ] Пользователь может видеть дисплей, показывающий текущий введенный номер или
+Результат последней операции.
+- [ ] Пользователь может видеть панель ввода, содержащую кнопки для цифр 0–9,
+операции — «+», «-», «/» и «=», кнопка «C» (для очистки) и «AC».
+кнопка (для очистки всего).
+- [ ] Пользователь может вводить числа в виде последовательностей длиной до 8 цифр, нажимая
+цифры на клавиатуре ввода. Ввод любых цифр больше 8 будет игнорироваться.
+- [ ] Пользователь может нажать кнопку операции, чтобы отобразить результат этой операции.
+операция на:
+     * результат предыдущей операции и последнее введенное число ИЛИ
+     * последние две введенные цифры ИЛИ
+     * последний введенный номер
+- [ ] Пользователь может нажать кнопку «C», чтобы удалить последний номер или последний
+операция. Если последняя запись пользователя была операцией, на дисплее будет
+обновляется до значения, которое предшествовало ему.
+- [ ] Пользователь может нажать кнопку «AC», чтобы очистить все внутренние рабочие области и
+чтобы установить дисплей на 0.
+- [ ] Пользователь может увидеть сообщение «ERR», если какая-либо операция превысит допустимый предел.
+Максимум 8 цифр.
+		*/
+
+/*
+
+			function checkData(data, min = false, max = false){ // проверка. data - входные данные, min - 'number'(0, 1, 2, 3..) проверка на минимальное значение , max - 'number' (0, 1, 2, 3..) проверка на максимальное значение 
+				data = data.replace(/[^0-9\()]/g, ''); 
+				if(min !== false){if(data < min){data = min;}}
+				if(max !== false){if(data > max){data = max;}}
+				return data;
+			}
+
+			document.getElementById('width').addEventListener('input', function()                      {this.value = checkData(this.value, 0);});
+			document.getElementById('height').addEventListener('input', function()                     {this.value = checkData(this.value, 0);});
+			document.getElementById('border').addEventListener('input', function()                     {this.value = checkData(this.value, 0);});
+			document.getElementById('border-top-left-radius').addEventListener('input', function()     {this.value = checkData(this.value, 0);});
+			document.getElementById('border-top-right-radius').addEventListener('input', function()    {this.value = checkData(this.value, 0);});
+			document.getElementById('border-bottom-right-radius').addEventListener('input', function() {this.value = checkData(this.value, 0);});
+			document.getElementById('border-bottom-left-radius').addEventListener('input', function()  {this.value = checkData(this.value, 0);});
+			document.getElementById('background-color-r').addEventListener('input', function()         {this.value = checkData(this.value, 0, 255);});
+			document.getElementById('background-color-g').addEventListener('input', function()         {this.value = checkData(this.value, 0, 255);});
+			document.getElementById('background-color-b').addEventListener('input', function()         {this.value = checkData(this.value, 0, 255);});
+			document.getElementById('border-color-r').addEventListener('input', function()             {this.value = checkData(this.value, 0, 255);});
+			document.getElementById('border-color-g').addEventListener('input', function()             {this.value = checkData(this.value, 0, 255);});
+			document.getElementById('border-color-b').addEventListener('input', function()             {this.value = checkData(this.value, 0, 255);});
+
+			function get(){
+				let newData = {
+					"width"                   : document.getElementById("width").value + "px",
+					"height"                  : document.getElementById("height").value + "px",
+					"backgroundColor"         : "rgb(" + document.getElementById("background-color-r").value + ", " + document.getElementById("background-color-g").value + ", " + document.getElementById("background-color-b").value + ")",			
+					"border"                  : "solid " + document.getElementById('border').value + "px rgb(" + document.getElementById("border-color-r").value + ", " + document.getElementById("border-color-g").value + ", " + document.getElementById("border-color-b").value + ")",
+					"borderTopLeftRadius"     : document.getElementById("border-top-left-radius").value + "px",
+					"borderTopRightRadius"    : document.getElementById("border-top-right-radius").value + "px",
+					"borderBottomRightRadius" : document.getElementById("border-bottom-right-radius").value + "px",
+					"borderBottomLeftRadius"  : document.getElementById("border-bottom-left-radius").value + "px",
+				};
+				
+				let css = "div#testDiv { \n " +
+				"width: " + newData.width + "; \n " + 
+				"height: " + newData.height + "; \n " + 
+				"backgroundColor: " + newData.backgroundColor + "; \n " + 
+				"border: " + newData.border + "; \n " + 
+				"borderTopLeftRadius: " + newData.borderTopLeftRadius + "; \n " + 
+				"borderTopRightRadius: " + newData.borderTopRightRadius + "; \n " + 
+				"borderBottomRightRadius: " + newData.borderBottomRightRadius + "; \n " + 
+				"borderBottomLeftRadius: " + newData.borderBottomLeftRadius + "; \n " + "}";
+
+
+				document.getElementById('codeOut').value = css;
+
+
+
+				let element = document.getElementById("testDiv");
+				console.log(css);
+				
+
+element.style.width = newData.width;
+element.style.height = newData.height;
+element.style.backgroundColor = newData.backgroundColor;
+element.style.border = newData.border;
+element.style.borderTopLeftRadius = newData.borderTopLeftRadius;
+element.style.borderTopRightRadius = newData.borderTopRightRadius;
+element.style.borderBottomRightRadius = newData.borderBottomRightRadius;
+element.style.borderBottomLeftRadius = newData.borderBottomLeftRadius;
+
+
+				
+
+
+
+
+			}
+
+
+	
+
+
+
+
+*/
+		
+		
+		</script>
+	</body>
+</html>
